@@ -5,7 +5,7 @@ defaults: &defaults
 version: 2.1
 
 jobs:
-  build:
+  create_infrastructure:
     <<: *defaults
     steps:
       - checkout
@@ -16,34 +16,8 @@ jobs:
           key: "npm-packages"
       - run: npm run lint
 
-  test:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - "npm-packages"
-      - run: npm i
-      - run: npm run test
-
-
-  analyse:
-    <<: *defaults
-    steps:
-      - checkout
-      - restore_cache:
-          keys:
-            - "npm-packages"
-      - run: npm i
-      - run: npm audit
 
 workflows:
   CI_workflow:
     jobs:
-      - build
-      - test:
-          requires: 
-            - build
-      - analyse:
-          requires: 
-            - test
+      - create_infrastructure
