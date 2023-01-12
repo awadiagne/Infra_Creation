@@ -31,7 +31,7 @@ jobs:
       - run:
           name: Run Playbook & Configure Server
           command: |
-            ansible-playbook -i inventory.txt main.yml 
+            ansible-playbook -i inventory.txt --key-file key-pair.yml --user ubuntu main.yml 
 
   smoke_test:
     docker:
