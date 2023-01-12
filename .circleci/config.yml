@@ -5,8 +5,6 @@ orbs:
 
 commands:
   destroy-environment:
-    docker:
-      - image: amazon/aws-cli
     steps:
       - run: 
           name: Destroy environment
@@ -47,7 +45,7 @@ jobs:
 
   smoke_test:
     docker:
-      - image: alpine:latest
+      - image: amazon/aws-cli
     steps:
       - checkout
       - run: apk add --update curl
